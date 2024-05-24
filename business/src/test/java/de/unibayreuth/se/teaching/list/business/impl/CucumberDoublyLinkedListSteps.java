@@ -78,4 +78,21 @@ public class CucumberDoublyLinkedListSteps {
     public void theListShouldContainElement(int count) {
         Assertions.assertEquals(count, list.getLength());
     }
+
+    @When("I insert an element with value {double}")
+    public void iInsertAnElementWithValueAtPosition(double element) {
+        list.insert(element);
+    }
+
+    @Then("The list should look like this:")
+    public void theListShouldLookLikeThis(List<Double> expected_list) {
+        if (list.getLength() != expected_list.size()) fail("List has not the same length as the DLL");
+        boolean elements_are_different = false;
+        DoublyLinkedList.Element current_element = list.getStart();
+        for (Double expected_element : expected_list) {
+            elements_are_different = elements_are_different || current_element.getValue() == expected_element;
+            current_element = current_element.getNext();
+        }
+        assertTrue(elements_are_different);
+    }
 }
