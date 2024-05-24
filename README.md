@@ -34,3 +34,7 @@ curl http://localhost:8080/list
 ```bash
 curl --request DELETE http://localhost:8080/list
 ```
+### Aufgabe 4-2 b)
+Das zugrundeliegende Prinzip nennt sich [Dependancy Injection](https://www.jamesshore.com/v2/blog/2006/dependency-injection-demystified) 
+und funktioniert indem eine höhere Softwareschicht - in diesem Fall Spring boot eine Instanz von ListServiceImpl generiert,
+die ListService implementiert. Der Service diehnt dabei wie eine Art Bestellung für die zur Laufzeit dann die Implementaion eingefügt wird. 
