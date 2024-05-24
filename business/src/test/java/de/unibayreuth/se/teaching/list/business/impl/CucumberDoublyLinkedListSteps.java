@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Step definitions for the Cucumber tests of the doubly-linked list.
  */
@@ -30,7 +32,7 @@ public class CucumberDoublyLinkedListSteps {
 
     @Given("^an empty list$")
     public void anEmptyList() {
-        Assertions.assertTrue(list.isEmpty());
+        assertTrue(list.isEmpty());
     }
 
     @Given("^I have elements with the following values in my list:$")
@@ -90,9 +92,9 @@ public class CucumberDoublyLinkedListSteps {
         boolean elements_are_different = false;
         DoublyLinkedList.Element current_element = list.getStart();
         for (Double expected_element : expected_list) {
-            elements_are_different = elements_are_different || current_element.getValue() == expected_element;
+            elements_are_different = elements_are_different || current_element.getValue() != expected_element;
             current_element = current_element.getNext();
         }
-        assertTrue(elements_are_different);
+        if (elements_are_different) fail("DLL has not the right elements in the correct order");
     }
 }
