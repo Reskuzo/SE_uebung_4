@@ -3,9 +3,12 @@ package de.unibayreuth.se.teaching.list.api.controller;
 import de.unibayreuth.se.teaching.list.api.dto.ListElementDto;
 import de.unibayreuth.se.teaching.list.business.ports.ListService;
 import de.unibayreuth.se.teaching.list.business.ports.Value;
+import io.swagger.v3.core.util.Json;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONArray;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +40,12 @@ public class ListController {
         return ResponseEntity.ok(listService.get().stream()
                 .map(this::toDto)
                 .toList());
+    }
+
+    @DeleteMapping(value = "/list")
+    public ResponseEntity<List<ListElementDto>> deleteList() {
+        listService.delete();
+        return ResponseEntity.ok(listService.get().stream().map(this::toDto).toList());
     }
 
     /**
